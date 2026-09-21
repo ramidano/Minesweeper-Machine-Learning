@@ -5,7 +5,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 import pygame
-sys.path.append('../ms')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
 from game.minesweeper_engine import Game
 import game.minesweeper_pygame as ms_gui
 
@@ -125,7 +127,7 @@ class MinesweeperAI:
 class AIEnhancedGUI(ms_gui.MinesweeperGUI):
     def __init__(self, difficulty=2):
         super().__init__(difficulty)
-        self.ai = MinesweeperAI("./model/minesweeper_model.pth")
+        self.ai = MinesweeperAI("minesweeper_model.pth")
         self.ai_active = False
         self.last_ai_move = 0
         self.current_ai_prob = 0.0
