@@ -34,7 +34,7 @@ NUM_COLORS = {
 # ---------- Helpers ----------
 def draw_text_center(surface, text, rect, font, color=(0,0,0)):
     txt = font.render(text, True, color)
-    tr = txt.get_rect(center=rect.center)
+    tr = txt.get_rect(midleft=rect.midleft)
     surface.blit(txt, tr)
 def draw_text_right(surface, text, rect, font, color=(0,0,0)):
     txt = font.render(text, True, color)
@@ -46,7 +46,7 @@ class MinesweeperGUI:
         pygame.init()
         pygame.display.set_caption("Minesweeper (Pygame)")
         self.clock = pygame.time.Clock()
-        self.font_small = pygame.font.SysFont(FONT_NAME, 16)
+        self.font_small = pygame.font.SysFont(FONT_NAME, 21)
         self.font_mid = pygame.font.SysFont(FONT_NAME, 28)
         self.font_big = pygame.font.SysFont(FONT_NAME, 48, bold=True)
 
@@ -121,12 +121,12 @@ class MinesweeperGUI:
         left_text = f"Mines: {mines_left}"
         mid_text = f"Time: {timer:03.1f}"
         right_text = "[R] New game"
-        rect_left = pygame.Rect(0, 10, 150, TOP_BAR-20)
-        rect_mid = pygame.Rect(self.w//2 - 75, 10, 150, TOP_BAR-20)
+        rect_left = pygame.Rect(25, 10, 150, TOP_BAR-20)
+        rect_mid = pygame.Rect(self.w//2 - 50, 10, 150, TOP_BAR-20)
         rect_right = pygame.Rect(self.w - 180, 10, 150, TOP_BAR-20)
-        draw_text_center(self.screen, left_text, rect_left, self.font_mid, TEXT_COLOR)
-        draw_text_center(self.screen, mid_text, rect_mid, self.font_mid, TEXT_COLOR)
-        draw_text_right(self.screen, right_text, rect_right, self.font_mid, TEXT_COLOR)
+        draw_text_center(self.screen, left_text, rect_left, self.font_small, TEXT_COLOR)
+        draw_text_center(self.screen, mid_text, rect_mid, self.font_small, TEXT_COLOR)
+        draw_text_right(self.screen, right_text, rect_right, self.font_small, TEXT_COLOR)
         side = self.game.board.side
         grid_rect = pygame.Rect(MARGIN, TOP_BAR, self.cell_size*side, self.cell_size*side)
         pygame.draw.rect(self.screen, GRID_BG, grid_rect)
@@ -188,7 +188,7 @@ class MinesweeperGUI:
 # --------- Run entrypoint ----------
 def parse_args():
     p = argparse.ArgumentParser(description="Minesweeper Pygame GUI")
-    p.add_argument("--difficulty", "-d", type=int, choices=(1,2,3), default=1,
+    p.add_argument("--difficulty", "-d", type=int, choices=(1,2,3), default=2,
                    help="Difficulty: 1=10x10(10), 2=18x18(40), 3=24x24(99)")
     return p.parse_args()
 

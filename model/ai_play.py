@@ -127,7 +127,7 @@ class MinesweeperAI:
 class AIEnhancedGUI(ms_gui.MinesweeperGUI):
     def __init__(self, difficulty=2):
         super().__init__(difficulty)
-        self.ai = MinesweeperAI("minesweeper_model.pth")
+        self.ai = MinesweeperAI(parent_dir + "\\model\\minesweeper_model.pth")
         self.ai_active = False
         self.last_ai_move = 0
         self.current_ai_prob = 0.0
